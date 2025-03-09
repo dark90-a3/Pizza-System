@@ -6,8 +6,8 @@ enum pizzaSize { Small, Medium, Large }
 abstract class Pizza {
   String? name;
   pizzaSize? size;
-  double price = 0.0;
-  List<String> toppings = [];
+  double price;
+  List<String> toppings;
 
   Pizza(this.name, this.size, this.price, this.toppings);
 
@@ -98,24 +98,6 @@ class orderPizza {
   }
 }
 
-double calculatePrice(String size, String type, int numToppings) {
-  double price = 0.0;
-  if (size == "S") {
-    price += 10.0;
-  } else if (size == "M") {
-    price += 15.0;
-  } else if (size == "L") {
-    price += 20.0;
-  }
-  if (type == "Veg") {
-    price += 5.0;
-  } else if (type == "Non-Veg") {
-    price += 10.0;
-  }
-  price += numToppings * 2.0;
-  return price;
-}
-
 displayPizzaOrder(String size, String type, int numToppings) {
   print("Pizza Order:");
   print("Size: $size");
@@ -172,12 +154,12 @@ void main() {
           print("Invalid choice. Please try again.");
           continue;
       }
-      orderPizza order = orderPizza("ORD123", "CUST456", pizza, pizza.price);
+      orderPizza order = orderPizza("123", "456", pizza, pizza.price);
       print("\nYour Order:");
       print(order.toString());
-      stdout.write("Confirm and pay? (yes/no): ");
+      stdout.write("Confirm and pay? (Y/N): ");
       String confirm = stdin.readLineSync()!;
-      if (confirm.toLowerCase() == "yes") {
+      if (confirm.toLowerCase() == "y") {
         order.payOrder();
         print("Thank you for your order!");
       } else {
